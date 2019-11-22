@@ -19,9 +19,29 @@ form {
   align-items: center;
 }
 
-body {
+body{
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: relative;
+  color: white;
   font-family: "Odibee Sans", cursive;
-  background-color: rgb(246, 246, 246);
+  background-color: rgb(12, 12, 12);
+}
+
+body::after {
+  content: "";
+ background-image: url(/img/marvel_birthday.jpg) ;
+  width: 100vw;
+  height: 100vh;
+
+  top:0;
+  left:0;
+  background-attachment: fixed;
+  position:absolute;
+
+  opacity: 0.30;
+  z-index: -1;
 }
 
 header {
@@ -35,35 +55,38 @@ header {
   margin-bottom: 10%;
 }
 
-.wrapper {
+#wrapper {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
 }
 
-.heroName {
+
+#main-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}
+
+ #heroName {
   grid-column-start: 3;
   width: 100%;
   text-align: center;
   font-size: 2em;
 }
 
-.wrapper1 {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
+#wrapper1 {
 }
-
 #appearance {
   width: 80%;
   font-size: 1.5em;
   border: 1px solid black;
+  padding: 5%;
+  grid-row-start: 1;
 }
 
 #aliases {
     margin-right: 10px;
     display: flex;
     flex-direction: column;
+    
 }
 
 #alterEgos {
@@ -84,26 +107,38 @@ span {
   width: 80%;
   font-size: 1.5em;
   border: 1px solid black;
+  padding: 5%;
+  grid-column-start: 3;
+  margin: 10%;
 }
-
 #connections {
   width: 80%;
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 1.4em;
   border: 1px solid black;
+  padding: 5%;
+  margin: 10%;
 }
 
 #powerstats {
   width: 80%;
   font-size: 1.5em;
   border: 1px solid black;
+  padding: 5%;
+  margin: 10%;
+}
+
+h2 {
+  filter: none;
 }
 
 #work {
   width: 80%;
   font-size: 1.5em;
   border: 1px solid black;
+  padding: 5%;
+  margin: 10%;
 }
 
 #target {

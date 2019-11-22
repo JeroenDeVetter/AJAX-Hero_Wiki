@@ -1,4 +1,3 @@
-const template = document.getElementById("heros-info");
 
 document.getElementById('test').addEventListener('submit', function(e) {
   getHero()
@@ -11,10 +10,16 @@ document.getElementById("input").addEventListener("input", function() {
   }
 });
 
-function createTag(content , className , tagName) {
+function createTag(content , idName , tagName) {
   const element = document.createElement(tagName);
-  element.classList.add(className);
+  element.setAttribute('id', idName)
   element.innerHTML = content;
+  return element;
+}
+
+function createWrapper(idName , tagName) {
+  const element = document.createElement(tagName)
+  element.setAttribute('id', idName);
   return element;
 }
 
@@ -30,73 +35,91 @@ async function getHero() {
     .then(res => res.json())
     .then(result => {
       console.log(result);
-      const tempNode = template.content.cloneNode(true);
+      const mainWrapper = createWrapper('main-wrapper','div');
+      const wrapper = createWrapper('wrapper','div');
+      const wrapper1 = createWrapper('wrapper1', 'div');
+      const appearance = createWrapper('appearance',  'div');
+      const biography = createWrapper('biography' , 'div');
+      const connections = createWrapper('connections', 'div');
+      const powerstats = createWrapper('powerstats' , 'div');
+      const work = createWrapper('work', 'div');
+      wrapper.appendChild(createTag(result.name,"heroName",'h1'));
+      
+      //appearance Generate
+      appearance.appendChild(createTag("Eyecolor", '', 'h2'));   
+      appearance.appendChild(createTag(result.appearance.eyeColor , "eyeColor" ,"div"));
+      appearance.appendChild(createTag("Gender", '', 'h2'));
+      appearance.appendChild(createTag(result.appearance.gender , "gender" ,"div"));
+      appearance.appendChild(createTag("Hair Color", '', 'h2'));
+      appearance.appendChild(createTag(result.appearance.hairColor , "hairColor" ,"div"));
+      appearance.appendChild(createTag("Race", '', 'h2'));
+      appearance.appendChild(createTag(result.appearance.race , "race" ,"div"));
+      appearance.appendChild(createTag("Height", '', 'h2'));
+      appearance.appendChild(createTag("Height: " + result.appearance.height[0] + "ft " + result.appearance.height[1], 'hairColor', 'div'))
+      appearance.appendChild(createTag("Weight", '', 'h2'));
+      appearance.appendChild(createTag("Weight: " + result.appearance.weight[0] + "lbs " + result.appearance.weight[1], "weight", 'div'));
+      wrapper1.appendChild(appearance)
 
-      tempNode.getElementById('wrapper').appendChild(createTag(result.name,"heroName",'h1'));
-      tempNode.getElementById("gender").innerHTML;
-
-      tempNode.getElementById("eyeColor").innerHTML =
-        "eyeColor: " + result.appearance.eyeColor;
-      tempNode.getElementById("hairColor").innerHTML =
-        "hairColor: " + result.appearance.hairColor;
-      tempNode.getElementById("race").innerHTML =
-        "Rase: " + result.appearance.race;
-      tempNode.getElementById("height").innerHTML =
-        "Height: " +
-        result.appearance.height[0] +
-        "ft " +
-        result.appearance.height[1];
-      tempNode.getElementById("weight").innerHTML =
-        "Weight: " +
-        result.appearance.weight[0] +
-        "lbs " +
-        result.appearance.weight[1];
+      //biography Generate
+      biography.appendChild(createTag("Aliases", '', 'h2'));   
       result.biography.aliases.forEach(element => {
         const spans = document.createElement("span");
+        const aliases = createWrapper('aliases','div');
         spans.innerHTML = element;
-        tempNode.getElementById("aliases").appendChild(spans);
+        aliases.appendChild(spans);
+        biography.appendChild(aliases);
       });
-      tempNode.getElementById("alignment").innerHTML =
-        "Aligment: " + result.biography.alignment;
-      tempNode.getElementById("alterEgos").innerHTML =
-      "AlterEgo: " +  
-      result.biography.alterEgos;
-      tempNode.getElementById("firstAppearance").innerHTML =
-      "FirstAppearance: " +  
-      result.biography.firstAppearance;
-      tempNode.getElementById("fullName").innerHTML =
-      "FullName" +
-      result.biography.fullName;
-      tempNode.getElementById("placeOfBirth").innerHTML =
-      "Place Of Birth: " +  
-      result.biography.placeOfBirth;
-      tempNode.getElementById("publisher").innerHTML =
-      "Publisher: " + 
-      result.biography.publisher;
-      tempNode.getElementById("affiliation").innerHTML =
-      "Group Affiliation: " + 
-      result.connections.groupAffiliation;
- 
-      const test = result.connections.relatives.split(',');
-      test.forEach(element => {
-        const test = document.createElement('span')
-        test.innerText = element;
-        tempNode.getElementById("relatives").appendChild(test)
+      biography.appendChild(createTag("Aligment", '', 'h2'));   
+      biography.appendChild(createTag("Aligment: " + result.biography.alignment,'alignment','div'));
+      biography.appendChild(createTag("AlterEgo", '', 'h2'));   
+      biography.appendChild(createTag("AlterEgo: " + result.biography.alterEgos, 'alterEgos', 'div'));
+      biography.appendChild(createTag("First Appearance", '', 'h2'));   
+      biography.appendChild(createTag("FirstAppearance: " + result.biography.firstAppearance,"firstAppearance","div"))   
+      biography.appendChild(createTag("FullName", '', 'h2'));   
+      biography.appendChild(createTag("FullName" + result.biography.fullName, 'fullName', 'div'));
+      biography.appendChild(createTag("Place of Birth", '', 'h2'));   
+      biography.appendChild(createTag("PlaceOfBirth: " + result.biography.placeOfBirth, 'placeOfBirth', 'div'));
+      biography.appendChild(createTag("Publisher", '', 'h2'));   
+      biography.appendChild(createTag("Publisher: " + result.biography.publisher , 'publisher', 'div'));
+      wrapper1.appendChild(biography)
+      
+      //connections gerete
+      connections.appendChild(createTag('Group affiliation','','h2')) 
+      connections.appendChild(createTag(result.connections.groupAffiliation, 'affiliation','div'))
+      const splitted = result.connections.relatives.split(',');
+      connections.appendChild(createTag('Relatives','','h2'));
+      splitted.forEach(element => {
+        connections.appendChild(createTag(element, 'affiliation','div')) 
       });
-      tempNode.getElementById("combat").innerHTML = "Combat: " + result.powerstats.combat;
-      tempNode.getElementById("durablility").innerHTML =
-      "Durability: " +   
-      result.powerstats.durability;
-      tempNode.getElementById("intelligence").innerHTML =
-      "Intelligence: " +  
-      result.powerstats.intelligence;
-      tempNode.getElementById("power").innerHTML = "Power: " + result.powerstats.power;
-      tempNode.getElementById("speed").innerHTML = "Speed: " + result.powerstats.speed;
-      tempNode.getElementById("strenght").innerHTML =
-        "Stranght: "  + result.powerstats.strength;
-      tempNode.getElementById("base").innerHTML = "Base: " + result.work.base;
-      tempNode.getElementById("occupation").innerHTML = "Occupation: " + result.work.occupation;
+      wrapper1.appendChild(connections);
+      
+      //Powerstats ganerate
+      powerstats.appendChild(createTag('Combat','','h2'))
+      powerstats.appendChild(createTag(result.powerstats.combat ,'combat','div'));
+      powerstats.appendChild(createTag('Durablitity','','h2'))
+      powerstats.appendChild(createTag(result.powerstats.durability,'durablility','div'));
+      powerstats.appendChild(createTag('Intelligence','','h2'))
+      powerstats.appendChild(createTag(result.powerstats.intelligence ,'intelligence','div'));
+      powerstats.appendChild(createTag('Power','','h2'))
+      powerstats.appendChild(createTag(result.powerstats.power ,'power','div'));
+      powerstats.appendChild(createTag('Speed','','h2'))
+      powerstats.appendChild(createTag(result.powerstats.speed ,'speed','div'));
+      powerstats.appendChild(createTag('Strength','','h2'))
+      powerstats.appendChild(createTag( result.powerstats.strength ,'strenght','div'));
+      wrapper1.appendChild(powerstats);
+      
+      //Work ganerate
+      work.appendChild(createTag('Base', '' , 'h2'))
+      work.appendChild(createTag(result.work.base ,'base','div'));
+      work.appendChild(createTag('Occupation', '' , 'h2'))
+      work.appendChild(createTag(result.work.occupation ,'occupation', 'div'));
+      wrapper1.appendChild(work);
+      
 
-      document.getElementById("target").appendChild(tempNode);
+      
+      mainWrapper.appendChild(wrapper1);
+      document.getElementById('target').appendChild(wrapper)
+      document.getElementById('target').appendChild(mainWrapper);
+      
     });
 }
