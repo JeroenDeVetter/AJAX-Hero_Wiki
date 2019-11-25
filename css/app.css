@@ -19,30 +19,28 @@ form {
   align-items: center;
 }
 
+#image {
+  grid-row-start: 1;
+  grid-column-start: 2;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+img {
+  border-radius: 15%;
+  width: 150px;
+}
+
 body{
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  position: relative;
-  color: white;
+  color:wheat;
   font-family: "Odibee Sans", cursive;
-  background-color: rgb(12, 12, 12);
-}
-
-body::after {
-  content: "";
- background-image: url(/img/marvel_birthday.jpg) ;
-  width: 100vw;
-  height: 100vh;
-
-  top:0;
-  left:0;
+  background-image: url('/img/image.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   background-attachment: fixed;
-  position:absolute;
-
-  opacity: 0.30;
-  z-index: -1;
 }
+
 
 header {
   color: wheat;
@@ -52,44 +50,54 @@ header {
   height: 60px;
   font-size: 1.5em;
   background-color: black;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+}
+
+#eyecolor {
+  display: none;
+}
+
+#gender {
+  display: none;
 }
 
 #wrapper {
   display: grid;
-}
-
-
-#main-wrapper {
-  display: grid;
   grid-template-columns: repeat(3,1fr);
 }
 
+
  #heroName {
-  grid-column-start: 3;
+  grid-column-start: 2;
   width: 100%;
   text-align: center;
   font-size: 2em;
 }
 
 #wrapper1 {
+  padding: 5%;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(5,1fr);
+  gap: 15px;
 }
 #appearance {
-  width: 80%;
-  font-size: 1.5em;
-  border: 1px solid black;
-  padding: 5%;
-  grid-row-start: 1;
+  width: 100%;
+  font-size: 1.2em;
+  grid-column-start: 2;
 }
 
-#aliases {
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
-    
+#haircolor {
+  display: none;
+}
+
+#Aliases {
+  display: none;
+   width: 100%;   
 }
 
 #alterEgos {
+  display: none;
     margin:  10px;
 }
 
@@ -103,42 +111,114 @@ span {
     margin-right: 10px;
 }
 
+#race {
+  display: none;
+}
+
+#height {
+  display: none;
+}
+#weight{
+  display: none;
+}
+#firstappearance {
+  display: none;
+}
+#fullname {
+  display: none;
+}
+
+#placeofbirth {
+  display: none;
+}
+
+#publisher {
+  display: none;
+}
+
+#Relatives {
+  display: none;
+}
+
+#affiliation {
+  display: none;
+}
+
+#combat {
+  display: none;
+}
+
+#durablitity {
+  display: none;
+}
+
+#intelligence {
+  display: none;
+}
+
+#power {
+  display: none;
+}
+
+#speed {
+  display: none;
+}
+
+#strenght {
+  display: none;
+}
+
+#base {
+  display: none;
+}
+
+#occupation {
+  display: none;
+}
+
+#aligment {
+  display: none;
+}
 #biography {
-  width: 80%;
-  font-size: 1.5em;
-  border: 1px solid black;
-  padding: 5%;
-  grid-column-start: 3;
-  margin: 10%;
+  width: 100%;
+  font-size: 1.2em;
 }
 #connections {
-  width: 80%;
-  padding-top: 5px;
+  width: 100%;
   padding-bottom: 5px;
-  font-size: 1.4em;
-  border: 1px solid black;
-  padding: 5%;
-  margin: 10%;
+  font-size: 1.2em;
 }
 
 #powerstats {
-  width: 80%;
-  font-size: 1.5em;
-  border: 1px solid black;
-  padding: 5%;
-  margin: 10%;
+  width: 100%;
+  position:relative;  
+  font-size: 1.2em;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+h2 {
+  border-radius: 15px;
+  margin-top: 0px;
+  filter: none;
+  font-size: 1.2em;
+  height: 50px;
+  color:black;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  margin-bottom: 10px;
 }
 
-h2 {
-  filter: none;
+h2:hover {
+  background: darkgreen;
 }
 
 #work {
-  width: 80%;
+  width: 100%;
   font-size: 1.5em;
-  border: 1px solid black;
-  padding: 5%;
-  margin: 10%;
+  grid-column-start: 5;
 }
 
 #target {
