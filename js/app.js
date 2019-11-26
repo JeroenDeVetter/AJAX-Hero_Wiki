@@ -1,7 +1,7 @@
 function createTag(content, idName, tagName) {
   const element = document.createElement(tagName);
   element.setAttribute("id", idName);
-  element.innerHTML = content;
+  element.innerText = content;
   return element;
 };
 
@@ -12,13 +12,14 @@ function createImage(src) {
 };
 
 function toggle() {
+  let style;
           switch (this.innerHTML) {
             case "Aliases":
-              const test = document.querySelectorAll("#Aliases");
+              let alias = document.querySelectorAll("#Aliases");
 
-              test.forEach(element => {
-                const testen = window.getComputedStyle(element).display;
-                if (testen === "none") {
+              alias.forEach(element => {
+                style = window.getComputedStyle(element).display;
+                if (style === "none") {
                   element.style.display = "block";
                 } else {
                   element.style.display = "none";
@@ -30,8 +31,8 @@ function toggle() {
               const alter = document.querySelectorAll("#alterEgos");
 
               alter.forEach(element => {
-                const testen = window.getComputedStyle(element).display;
-                if (testen === "none") {
+                style = window.getComputedStyle(element).display;
+                if (style === "none") {
                   element.style.display = "block";
                 } else {
                   element.style.display = "none";
@@ -42,22 +43,20 @@ function toggle() {
               case "First Appearance":
               
               const appearance = document.getElementById('firstappearance');
-              const Style = window.getComputedStyle(appearance).display 
-               
-              if(Style == 'block') {
-                appearance.style.display = "none";
-              }
-              else {
-                appearance.style.display = "block";
-              }
+                style = window.getComputedStyle(appearance).display;
+                if (style === "none") {
+                  appearance.style.display = "block";
+                } else {
+                  appearance.style.display = "none";
+                }
 
                 break;
 
                 case "Relatives":
                     const rel = document.querySelectorAll('#Relatives');
                      rel.forEach(element => {
-                      const testen = window.getComputedStyle(element).display;
-                      if (testen === "none") {
+                      style = window.getComputedStyle(element).display;
+                      if (style === "none") {
                         element.style.display = "block";
                       } else {
                         element.style.display = "none";
@@ -67,24 +66,21 @@ function toggle() {
 
                   case "Group Affiliation":
                     const afill = document.getElementById('affiliation');
-                      const testen1 = window.getComputedStyle(afill).display;
-                      if (testen1 === "none") {
-                        afill.style.display = "block";
-                      } else {
-                        afill.style.display = "none";
-                      }
+                    style = window.getComputedStyle(afill).display;
+                    if (style === "none") {
+                      afill.style.display = "block";
+                    } else {
+                      afill.style.display = "none";
+                    }
                     break;
 
               default:
-                const bla = document.getElementById(this.innerHTML.toLowerCase())
-                const test2 = window.getComputedStyle(bla).display;
-                
-                if(test2 == "block"){
-
-                bla.style.display = 'none';
-                }
-                else {
-                  bla.style.display = 'block';
+                const allOthers = document.getElementById(this.innerHTML.toLowerCase())
+                style = window.getComputedStyle(allOthers).display;
+                if (style === "none") {
+                  allOthers.style.display = "block";
+                } else {
+                  allOthers.style.display = "none";
                 }
               break;
           }
@@ -296,6 +292,8 @@ async function getHero() {
       toggel.forEach(element => {
         element.addEventListener("click",toggle)
       });
+    }).catch(err => {
+      alert('please give a vallid awnser')
     });
 };
 
